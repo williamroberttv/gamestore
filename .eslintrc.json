@@ -22,6 +22,7 @@
       "react-hooks"
   ],
   "rules": {
+    "react/no-children-prop": "off",
     "import/prefer-default-export": "off",
     "max-len": ["warn", { "code": 80 }],
     "react-hooks/rules-of-hooks": "error",
