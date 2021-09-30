@@ -1,8 +1,13 @@
+import { ChakraProvider } from '@chakra-ui/react';
+
+import { Home } from './pages/Home';
+import theme from './styles/theme';
+
 function App() {
   return (
-    <div className="App">
-      Game Store
-    </div>
+    <ChakraProvider theme={theme}>
+      <Home />
+    </ChakraProvider>
   );
 }
 
