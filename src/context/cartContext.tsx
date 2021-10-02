@@ -11,13 +11,32 @@ export function CartProvider({ children }: ChildrenType) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const getTotalPrice = () => {
-    const totalPrices = cartItems.map((item) => item.price);
+    const totalPrices = cartItems.map((item) => item.price * item.amount);
     const cartTotal = totalPrices.reduce((acc, item) => acc + item);
     return cartTotal.toFixed(2);
   };
 
-  const addToCart = (item: ProductsProps) => {
-    setCartItems((state) => [...state, item]);
+  const addToCart = (clickedItem: ProductsProps) => {
+    setCartItems((state) => {
+      const isItemInCart = state.find((item) => item.id === clickedItem.id);
+      if (isItemInCart) {
+        return state.map((item) => (item.id === clickedItem.id
+          ? { ...item, amount: item.amount + 1 }
+          : item));
+      }
+
+      return [...state, { ...clickedItem, amount: 1 }];
+    });
+  };
+
+  const removeFromCart = (id: number) => {
+    setCartItems((prev) => prev.reduce((acc, item) => {
+      if (item.id === id) {
+        if (item.amount === 1) return acc;
+        return [...acc, { ...item, amount: item.amount - 1 }];
+      }
+      return [...acc, item];
+    }, [] as ProductsProps[]));
   };
 
   const handleOpenCart = () => setIsOpen((state) => !state);
@@ -26,6 +45,7 @@ export function CartProvider({ children }: ChildrenType) {
     <CartContext.Provider value={{
       cartItems,
       addToCart,
+      removeFromCart,
       getTotalPrice,
       isOpen,
       handleOpenCart,

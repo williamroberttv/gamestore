@@ -1,7 +1,9 @@
 import {
   createContext, useState, useCallback,
   useContext,
+  useEffect,
 } from 'react';
+import { api } from '../services/api';
 import {
   ChildrenType, ProductsContextProps,
   ProductsProps,
@@ -15,6 +17,15 @@ export function ProductsProvider({ children }: ChildrenType) {
   const getProducts = useCallback(
     (data: ProductsProps[]) => setProducts(data), [],
   );
+
+  const getProductsData = useCallback(async () => {
+    const response = await api('products');
+    getProducts(response.data);
+  }, [getProducts]);
+
+  useEffect(() => {
+    getProductsData();
+  }, [getProductsData]);
 
   return (
     <ProductsContext.Provider value={{ products, getProducts }}>
