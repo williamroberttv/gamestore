@@ -6,6 +6,7 @@ export type ProductsProps = {
   price: number;
   score: number;
   image: string;
+  amount: number;
 };
 
 export type CardsProps = {
@@ -22,6 +23,7 @@ export type CartContextProps ={
   addToCart: (item: ProductsProps) => void;
   getTotalPrice: () => void;
   handleOpenCart: () => void;
+  removeFromCart: (id: number) => void;
 }
 
 export type ProductsContextProps ={
