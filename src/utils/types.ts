@@ -30,3 +30,9 @@ export type ProductsContextProps ={
   products: ProductsProps[];
   getProducts : (data: ProductsProps[]) => void;
 }
+
+export type FiltersProps = {
+  sortAlphabetically: (order: string) => void;
+  sortByPrice: (order: string) => void;
+  sortByStars: () => void;
+}
