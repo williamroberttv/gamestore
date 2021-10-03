@@ -1,12 +1,15 @@
 import { ChakraProvider } from '@chakra-ui/react';
+import { StoreContext } from './context/storeContext';
 
-import { Home } from './pages/Home';
+import { Routes } from './routes/routes';
 import theme from './styles/theme';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <Home />
+      <StoreContext>
+        <Routes />
+      </StoreContext>
     </ChakraProvider>
   );
 }
