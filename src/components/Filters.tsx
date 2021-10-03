@@ -13,10 +13,13 @@ export function Filters(
   const [selectedFilter, setSelectedFilter] = useState<string>('');
 
   return (
-    <Flex mt="50px" align="center" justify="flex-end">
-      <Text mr="16px" fontWeight="700">Filtros</Text>
+    <Flex
+      mt="50px"
+      align="center"
+      justify={['center', 'center', 'flex-end']}
+    >
+      <Text mr={['8px', '16px']} fontWeight="700">Filtros</Text>
       <IconButton
-        ml="8px"
         bg={selectedFilter === 'alphabetically down' ? '#E45C75' : ''}
         _hover={{ background: '#E45C75' }}
         aria-label="sort alphabetically down"
