@@ -11,13 +11,11 @@ import { Header } from '../../components/Header';
 import { Cards } from '../../components/Cards';
 import { Cart } from '../../components/Cart';
 import { useProducts } from '../../context/productsContext';
-import { useCartItems } from '../../context/cartContext';
 import { ProductsProps } from '../../utils/types';
 import { Filters } from '../../components/Filters';
 
 export function Home() {
   const { products } = useProducts();
-  const { cartItems } = useCartItems();
   const [filteredProducts, setFilteredProducts] = useState<ProductsProps[]>([]);
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -113,7 +111,7 @@ export function Home() {
           ))}
         </Grid>
       </Box>
-      <Cart items={cartItems} />
+      <Cart />
     </>
   );
 }

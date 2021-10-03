@@ -7,7 +7,7 @@ import { useCartItems } from '../context/cartContext';
 
 export function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const { cartItems, getTotalPrice, handleOpenCart } = useCartItems();
+  const { handleOpenCart, cartTotal } = useCartItems();
 
   return (
     <Flex
@@ -39,9 +39,7 @@ export function Header() {
         />
 
         <Text>
-          {`R$ ${cartItems.length > 0
-            ? getTotalPrice()
-            : '0.00'}`}
+          {`R$ ${cartTotal.toFixed(2)}`}
 
         </Text>
       </Flex>

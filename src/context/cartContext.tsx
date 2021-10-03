@@ -9,12 +9,7 @@ const CartContext = createContext({} as CartContextProps);
 export function CartProvider({ children }: ChildrenType) {
   const [cartItems, setCartItems] = useState<ProductsProps[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const getTotalPrice = () => {
-    const totalPrices = cartItems.map((item) => item.price * item.amount);
-    const cartTotal = totalPrices.reduce((acc, item) => acc + item);
-    return cartTotal.toFixed(2);
-  };
+  const [cartTotal, setCartTotal] = useState<number>(0);
 
   const addToCart = (clickedItem: ProductsProps) => {
     setCartItems((state) => {
@@ -41,13 +36,16 @@ export function CartProvider({ children }: ChildrenType) {
 
   const handleOpenCart = () => setIsOpen((state) => !state);
 
+  const getCartTotal = (total: number) => setCartTotal(total);
+
   return (
     <CartContext.Provider value={{
       cartItems,
+      isOpen,
+      cartTotal,
+      getCartTotal,
       addToCart,
       removeFromCart,
-      getTotalPrice,
-      isOpen,
       handleOpenCart,
     }}
     >

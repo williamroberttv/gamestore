@@ -20,8 +20,9 @@ export type ChildrenType = {
 export type CartContextProps ={
   cartItems: ProductsProps[];
   isOpen: boolean;
+  cartTotal: number;
   addToCart: (item: ProductsProps) => void;
-  getTotalPrice: () => void;
+  getCartTotal: (total: number) => void;
   handleOpenCart: () => void;
   removeFromCart: (id: number) => void;
 }

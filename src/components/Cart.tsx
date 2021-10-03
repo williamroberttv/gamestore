@@ -7,16 +7,33 @@ import {
 } from '@chakra-ui/react';
 import { FiMinus, FiPlus } from 'react-icons/fi';
 import { useCartItems } from '../context/cartContext';
-import { ProductsProps } from '../utils/types';
 
-type CartProps = {
-  items: ProductsProps[]
-}
-
-export function Cart({ items }: CartProps) {
+export function Cart() {
   const {
-    isOpen, cartItems, handleOpenCart, getTotalPrice,
+    isOpen, cartItems, handleOpenCart,
+    removeFromCart, addToCart, getCartTotal,
   } = useCartItems();
+
+  const getShippingTotal = () => {
+    const productsPrices = cartItems.map((item) => item.price * item.amount);
+    const totalProductsPrices = productsPrices.reduce(
+      (acc, item) => acc + item,
+    );
+    const amountProducts = cartItems.map((item) => item.amount);
+    const totalAmount = amountProducts.reduce((acc, item) => acc + item);
+    if (totalProductsPrices >= 250) {
+      return 0;
+    }
+    return totalAmount * 10;
+  };
+
+  const getTotal = () => {
+    const totalProducts = cartItems.map((item) => item.price * item.amount);
+    const totalProductsPrice = totalProducts.reduce((acc, item) => acc + item);
+    const totalShippingPrice = getShippingTotal();
+    getCartTotal(totalProductsPrice + totalShippingPrice);
+    return totalProductsPrice + totalShippingPrice;
+  };
 
   return (
     <Drawer
@@ -30,34 +47,47 @@ export function Cart({ items }: CartProps) {
         <DrawerCloseButton />
         <DrawerHeader>Finalize sua compra</DrawerHeader>
 
-        <DrawerBody>
+        <DrawerBody p="10px">
           <Flex flexDirection="column">
-            {items.map((item) => (
+            {cartItems.map((item) => (
               <Flex mb="20px" key={item.id}>
-                <Image src={`/assets/${item.image}`} />
-                <Flex flexDirection="column" justify="space-between">
+                <Image w={[150, 250]} src={`/assets/${item.image}`} />
+                <Flex ml="16px" flexDirection="column" justify="space-between">
                   <Box>
                     <Text mb="16px" fontWeight="700">{item.name}</Text>
                     <Text
                       mb="16px"
                       fontWeight="700"
                     >
-                      {`R$ ${item.price.toFixed(2)}`}
+                      {`R$ ${(item.price * item.amount).toFixed(2)}`}
 
                     </Text>
-                    <Text>
-                      {item.price > 250
-                        ? 'Frete grátis' : 'Frete: R$ 10,00'}
+                    <Text mb="16px">
+                      {getShippingTotal() === 0
+                        ? 'Frete grátis'
+                        : `Frete: R$ ${item.amount * 10}`}
                     </Text>
                   </Box>
-                  <Flex justify="space-between" align="center" maxW="150px">
+                  <Flex
+                    justify="space-between"
+                    align="center"
+                    w={['120px', '150px']}
+                  >
                     <IconButton
-                      aria-label="add"
+                      onClick={() => removeFromCart(item.id)}
+                      bg="#FD6682"
+                      _hover={{ filter: 'brightness(0.9)' }}
+                      aria-label="subtract"
                       icon={<FiMinus size={20} />}
                     />
-                    <Text> 0 </Text>
+                    <Text>
+                      {item.amount}
+                    </Text>
                     <IconButton
-                      aria-label="subtract"
+                      onClick={() => addToCart(item)}
+                      bg="#FD6682"
+                      _hover={{ filter: 'brightness(0.9)' }}
+                      aria-label="add"
                       icon={<FiPlus size={20} />}
                     />
                   </Flex>
@@ -68,11 +98,20 @@ export function Cart({ items }: CartProps) {
         </DrawerBody>
 
         <DrawerFooter>
-          <Text mr="16px" fontWeight="700">
-            {cartItems.length > 0
-              ? `Total: R$ ${getTotalPrice()}`
-              : 'Nenhum item no carrinho'}
-          </Text>
+          {cartItems.length > 0
+            ? (
+              <Flex>
+                <Text mr="16px" fontWeight="700">
+                  {(getShippingTotal() === 0
+                    ? 'Frete grátis'
+                    : `Frete: R$ ${getShippingTotal().toFixed(2)}`)}
+                </Text>
+                <Text mr="16px" fontWeight="700">
+                  {`Total: R$ ${getTotal().toFixed(2)}`}
+                </Text>
+              </Flex>
+            )
+            : (<Text>Nenhum item no carrinho</Text>)}
           <Button
             onClick={handleOpenCart}
             variant="outline"
