@@ -111,7 +111,7 @@ export function Cart() {
                 </Text>
               </Flex>
             )
-            : (<Text>Nenhum item no carrinho</Text>)}
+            : (<Text mr="16px">Nenhum item no carrinho</Text>)}
           <Button
             onClick={handleOpenCart}
             variant="outline"
