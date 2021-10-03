@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+<h3 align="center">
+    <br>
+    <b>gamestore ecommerce de games.</b>
+    <br>
+</h3>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Índice
 
-In the project directory, you can run:
+- [Sobre](#sobre)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Como Usar](#como-usar)
+- [Como Contribuir](#como-contribuir)
 
-### `yarn start`
+<a id="sobre"></a>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## :bookmark: Sobre
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+O <strong>gamestore</strong> é um ecommerce de games, com algumas funcionalidades como filtros de nome, preço, score, alfabetica.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<a id="tecnologias-utilizadas"></a>
 
-### `yarn build`
+## :rocket: Tecnologias Utilizadas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+O projeto foi desenvolvido utilizando as seguintes tecnologias
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [TypeScript](https://www.typescriptlang.org/)
+- [React](https://reactjs.org/)
+- [ChakraUI](https://chakra-ui.com/)
+- [json-server](https://www.npmjs.com/package/json-server)
+- [axios](https://github.com/axios/axios)
+- [React router](https://reactrouter.com/web/guides/quick-start)
+- [React icons](https://react-icons.github.io/react-icons/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+<a id="como-usar"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## :fire: Como usar
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- ### **Pré-requisitos**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  - É **necessário** possuir o **[Node.js](https://nodejs.org/en/)** instalado na máquina
+  - Também, é **preciso** ter um gerenciador de pacotes seja o **[NPM](https://www.npmjs.com/)** ou **[Yarn](https://yarnpkg.com/)**.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Faça um clone :
 
-## Learn More
+```sh
+  $ git clone https://github.com/williamroberttv/gamestore.git
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Executando a Aplicação:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+  # Instale as dependências
+  $ npm install
+  ou
+  $ yarn install
+
+  # Inicie a Aplicação
+  $ npm server
+  $ npm start
+  ou
+  $ yarn server
+  $ yarn start
+
+```
+
+<a id="como-contribuir"></a>
+
+## :recycle: Como contribuir
+
+- Faça um Fork desse repositório,
+- Crie uma branch com a sua feature: `git checkout -b my-feature`
+- Commit suas mudanças: `git commit -m 'feat: My new feature'`
+- Push a sua branch: `git push origin my-feature`
